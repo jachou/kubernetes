@@ -198,7 +198,7 @@ current-context: default
 			if err != nil {
 				return fmt.Errorf("error building sar client: %v", err)
 			}
-			_, err = newWithBackoff(sarClient, 0, 0, testRetryBackoff)
+			_, err = newWithBackoff(sarClient, 0, 0, testRetryBackoff, 0)
 			return err
 		}()
 		if err != nil && !tt.wantErr {
@@ -337,7 +337,7 @@ func newV1Authorizer(callbackURL string, clientCert, clientKey, ca []byte, cache
 	if err != nil {
 		return nil, fmt.Errorf("error building sar client: %v", err)
 	}
-	return newWithBackoff(sarClient, cacheTime, cacheTime, testRetryBackoff)
+	return newWithBackoff(sarClient, cacheTime, cacheTime, testRetryBackoff, 0)
 }
 
 func TestV1TLSConfig(t *testing.T) {
